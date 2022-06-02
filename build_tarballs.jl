@@ -81,6 +81,8 @@ products = [
 # Dependencies that must be installed before this package can be built
 dependencies = [
     Dependency(PackageSpec(name="CompilerSupportLibraries_jll")),
+    Dependency(PackageSpec(name="FFTW_jll")),
+    Dependency(PackageSpec(name="Python_jll")),
 ]
 
 all_platforms, platform_dependencies = MPI.augment_platforms(platforms)
