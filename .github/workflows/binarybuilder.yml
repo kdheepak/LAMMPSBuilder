@@ -17,3 +17,10 @@ jobs:
         run: |
           julia --color=yes -e 'using Pkg; pkg"add BinaryBuilder; build"'
           julia --color=yes build_tarballs.jl --verbose ${{ matrix.target }}
+      - name: Publish tarball
+        if: startsWith(github.ref, 'refs/tags')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: products/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
