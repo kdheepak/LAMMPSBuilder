@@ -7,7 +7,6 @@ jobs:
       matrix:
         target:
           - x86_64-linux-gnu
-          - x86_64-linux-musl
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
