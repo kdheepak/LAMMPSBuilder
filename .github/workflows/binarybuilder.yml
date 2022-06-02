@@ -1,0 +1,22 @@
+name: BinaryBuilder
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - x86_64-linux-gnu
+          - x86_64-linux-musl
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: 1.4.0
+      - name: Setup BinaryBuilder
+        env:
+          BINARYBUILDER_RUNNER: privileged
+          BINARYBUILDER_AUTOMATIC_APPLE: true
+        run: |
+          julia --color=yes -e 'using Pkg; pkg"add BinaryBuilder; build"'
+          julia --color=yes build_tarballs.jl --verbose ${{ matrix.target }}
